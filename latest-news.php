@@ -2,14 +2,14 @@
 /**
  * @package Latest-News
  * @author James Piggot
- * @version 0.1.0
+ * @version 0.2.0
  */
 /*
 Plugin Name: Latest News
-Plugin URI: http://wordpress.org/#
+Plugin URI: http://chorosdesign.com/wordpress/plugins/
 Description: Allows Latest News posts to be input from the admin menu and tags to output the Latest News items on your templates 
 Author: James Piggot
-Version: 0.1.0
+Version: 0.2.0
 Author URI: http://chorosdesign.com
 License: GPL2
 */
@@ -28,6 +28,7 @@ function jep_latest_news_init()
     'search_items' => __('Search Latest News'),
     'not_found' =>  __('No Latest News found'),
     'not_found_in_trash' => __('No Latest News found in Trash'), 
+    '_builtin' =>  false, 
     'parent_item_colon' => ''
   );
   $args = array(
@@ -48,7 +49,7 @@ function jep_latest_news_init()
 }
 
 /*
-Template function to output the latest news stories
+	Template function to output the latest news stories
 */
 function jep_latest_news_loop($args = null)	{
 	$defaults = array(
@@ -60,22 +61,22 @@ function jep_latest_news_loop($args = null)	{
 		'before_entry' => '<div class="entry-content">',
 		'after_entry' => '</div>'
 	);
+	
+	global $paged;
 
 	$r = wp_parse_args( $args, $defaults );
-	
-
+  	
 	$qargs=array(
-	   'post_type'=>'latest-news',
-	   'posts_per_page' => $r[news_items]
+	   	'post_type'=>'latest-news',
+	   	'posts_per_page' => $r[news_items],
+		'paged' => $paged
 	);
 
-	// Set the parameter array for WP_Query which are different to the latest news parms
-	$loop = new WP_Query($qargs);
+	query_posts($qargs);
+ 
+	while ( have_posts() ) : the_post(); 
 	
-	while ( $loop->have_posts() ) : $loop->the_post();?>
-	
-		<?php if ($r[title]):?>
-			<?php echo($r[before_title]);?><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a><?php echo($r[after_title]);?>
+		if ($r[title]): echo($r[before_title]);?><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a><?php echo($r[after_title]);?>
 		<?php endif;?>
 		
 		<?php if ($r[content]):
@@ -84,11 +85,6 @@ function jep_latest_news_loop($args = null)	{
 				<?php the_content('read more...');?>
 				<?php echo($r[after_entry]);?>
 		<?php endif;?>	
-		
 	<?php endwhile;
-
-	// RESET THE QUERY - just in case 
-	wp_reset_query();
-	
 }
 ?>

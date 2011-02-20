@@ -2,10 +2,8 @@
 Contributors: jamespiggot
 Tags: news, latest news
 Requires at least: 3.0.4
-Tested up to: 3.0.4
+Tested up to: 3.0.5
 Stable tag: `/trunk/`
-
-
 
 == Description ==
 
@@ -25,16 +23,25 @@ There is a template tag that will output the Latest News items as posts using a 
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Add the templates tags as required to your templates	
 
-== Changelog ==
+== Frequently Asked Questions ==
 
-= 1.0 =
+= How do you add the news items to a page?=
+
+Please refer to the detailed explanantion at http://www.chorosdesign.com/latest-news-plugin/.
+
+== Changelog ==
+= 0.2.0 =
+* Minor revision to fix pagination of news items
+* Minor revision to correct the plugin URI
+= 0.1.0 =
 * First version released.
 
 == Upgrade Notice ==
-
-= 1.0 =
-First version released.
+= 0.2.0 =
+* Revision to fix pagination of news items
+* Minor revision to correct the plugin URI
 
 == Links ==
 
-http://www.chorosdesign.com/wordpress/plugins/
+* http://www.chorosdesign.com/wordpress/plugins/
+* http://www.chorosdesign.com/latest-news-plugin/
